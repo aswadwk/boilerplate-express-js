@@ -1,0 +1,45 @@
+{
+  "name": "boilerplate-express",
+  "version": "1.0.0",
+  "description": "boilerplate express js",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest -i",
+    "dev": "nodemon src/main.js"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "keywords": [
+    "express",
+    "js",
+    "node",
+    "js",
+    "api"
+  ],
+  "author": "Hajar Aswad - hajaraswadkom@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "joi": "^17.13.1",
+    "uuid": "^9.0.1",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.5",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/joi": "^17.2.3",
+    "@types/supertest": "^6.0.2",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.13.0",
+    "supertest": "^7.0.0"
+  }
+}
