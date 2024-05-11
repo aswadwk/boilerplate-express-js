@@ -4,14 +4,12 @@ const errorMiddleware = async (err, req, res, next) => {
 
     if (!err) {
         next();
-
-        return
     }
 
     if (err instanceof ResponseError) {
         return res.status(err.status).json({
             status: false,
-            message: err.message,
+            message: err.message.replace(/"/g, ''),
             data: null
         }).end();
     }

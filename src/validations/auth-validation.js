@@ -7,6 +7,13 @@ const registerValidation = Joi.object({
 }).options({ stripUnknown: true });
 
 
+const loginValidation = Joi.object({
+    password: Joi.string().required().min(8),
+    email: Joi.string().email().required(),
+}).options({ stripUnknown: true });
+
+
 export {
-    registerValidation
+    registerValidation,
+    loginValidation,
 }

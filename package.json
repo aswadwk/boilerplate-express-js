@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest -i",
-    "dev": "nodemon src/main.js"
+    "dev": "nodemon src/main.js",
+    "test:watch": "jest --watchAll --coverage --setupFiles -i --testTimeout=50000"
   },
   "jest": {
     "transform": {
@@ -27,6 +28,7 @@
     "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "joi": "^17.13.1",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^9.0.1",
     "winston": "^3.13.0"
   },
