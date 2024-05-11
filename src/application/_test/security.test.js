@@ -1,101 +1,102 @@
-import { decodeToken, generateAccessToken, generateRefreshToken, verifyAccessToken, verifyRefreshToken } from "../security";
+import {
+    decodeToken, generateAccessToken, generateRefreshToken, verifyAccessToken, verifyRefreshToken,
+} from '../security.js';
 
-describe("Security Test", () => {
-    it("can generate access token", async () => {
+describe('Security Test', () => {
+    it('can generate access token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
         // Act
-        const token = generateAccessToken(payload)
+        const token = generateAccessToken(payload);
 
         // Assert
-        expect(token).toBeDefined()
+        expect(token).toBeDefined();
     });
 
-    it("can generate refresh token", async () => {
+    it('can generate refresh token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
         // Act
-        const token = generateAccessToken(payload)
+        const token = generateAccessToken(payload);
 
         // Assert
-        expect(token).toBeDefined()
+        expect(token).toBeDefined();
     });
 
-    it("can verify access token", async () => {
+    it('can verify access token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
-        const token = generateAccessToken(payload)
+        const token = generateAccessToken(payload);
 
         // Act
-        const result = verifyAccessToken(token)
+        const result = verifyAccessToken(token);
 
         // Assert
-        expect(result).toBeDefined()
+        expect(result).toBeDefined();
     });
 
-    it("can not verify access token", async () => {
+    it('can not verify access token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
-        const token = generateAccessToken(payload) + "a"
+        const token = `${generateAccessToken(payload)}a`;
 
         // Act
         try {
-            verifyAccessToken(token)
+            verifyAccessToken(token);
         } catch (error) {
             // Assert
-            expect(error).toBeDefined()
+            expect(error).toBeDefined();
         }
     });
 
-    it("can not verify refresh token", async () => {
+    it('can not verify refresh token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
-        const token = generateRefreshToken(payload)
+        const token = generateRefreshToken(payload);
 
         // Act
         try {
-            verifyRefreshToken(token)
+            verifyRefreshToken(token);
         } catch (error) {
             // Assert
-            expect(error).toBeDefined()
+            expect(error).toBeDefined();
         }
     });
 
-    it("can decode token", async () => {
+    it('can decode token', async () => {
         // Arrange
         const payload = {
-            email: "aswad@gmail.com",
-            id: "123"
-        }
+            email: 'aswad@gmail.com',
+            id: '123',
+        };
 
-        const token = generateAccessToken(payload)
+        const token = generateAccessToken(payload);
 
         // Act
-        const result = decodeToken(token)
+        const result = decodeToken(token);
 
         // Assert
-        expect(result.email).toEqual(payload.email)
-        expect(result.id).toEqual(payload.id)
-
+        expect(result.email).toEqual(payload.email);
+        expect(result.id).toEqual(payload.id);
     });
 });
