@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import prismaClient from '../application/database.js';
@@ -48,6 +49,8 @@ const currentUser = async (req, res, next) => {
 function manipulateData(input) {
     const output = {
         file_name: input.file_name,
+        contract_number: input.contract_number,
+        cabang: input.cabang,
         no_kk: '',
         nama_kk: '',
         address: '',
@@ -202,6 +205,8 @@ function manipulateData(input) {
             province: output.province,
             postal_code: output.postal_code,
             file_name: output.file_name,
+            contract_number: output.contract_number,
+            cabang: output.cabang,
         });
     });
 
@@ -219,6 +224,8 @@ function insertData(input) {
             kk_no_gros: input.kk_no_gros,
             kk_no: input.kk_no,
             number: input.number_kk,
+            contract_number: input.contract_number,
+            cabang: input.cabang,
             name: input.name,
             nik_gros: input.nik_gros,
             nik: input.nik,
@@ -254,20 +261,21 @@ const prosesData = async (req, res, next) => {
 
         for (const smartScan of smartScans) {
             const predictions = JSON.parse(smartScan.response_json).result[0].prediction;
-            predictions.file_name = smartScan.file_name;
+
+            const fileName = smartScan.file_name;
+            predictions.file_name = fileName;
+            const namaFile = fileName.split('/')[1].split('.')[0];
+            predictions.contract_number = namaFile;
+            predictions.cabang = `${namaFile.substring(0, 3)}000`;
             results.push(manipulateData(predictions));
         }
 
         let totalData = 0;
         for (const result of results) {
-            const { length } = result.table;
-
-            if (length > 0) {
-                totalData += 1;
-                for (const item of result.table) {
-                    item.number_kk = totalData.toString();
-                    await insertData(item);
-                }
+            totalData += 1;
+            for (const item of result.table) {
+                item.number_kk = totalData.toString();
+                await insertData(item);
             }
         }
 

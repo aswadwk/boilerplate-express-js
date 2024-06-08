@@ -33,6 +33,7 @@ model FamilyCard {
   id                    Int     @id @default(autoincrement())
   number                String? @db.VarChar(60)
   file_name             String? @db.VarChar(30)
+  contract_number       String? @db.VarChar(100)
   kk_no_gros            String? @db.VarChar(60)
   kk_no                 String? @db.VarChar(60)
   cabang                String? @db.VarChar(255)
