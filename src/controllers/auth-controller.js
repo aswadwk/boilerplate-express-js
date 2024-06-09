@@ -49,6 +49,8 @@ const currentUser = async (req, res, next) => {
 function manipulateData(input) {
     const output = {
         file_name: input.file_name,
+        file_path: input.file_path,
+        smart_scan_id: input.smart_scan_id,
         contract_number: input.contract_number,
         cabang: input.cabang,
         no_kk: '',
@@ -205,6 +207,8 @@ function manipulateData(input) {
             province: output.province,
             postal_code: output.postal_code,
             file_name: output.file_name,
+            file_path: output.file_path,
+            smart_scan_id: output.smart_scan_id,
             contract_number: output.contract_number,
             cabang: output.cabang,
         });
@@ -239,6 +243,8 @@ function manipulateData(input) {
             province: output.province,
             postal_code: output.postal_code,
             file_name: output.file_name,
+            file_path: output.file_path,
+            smart_scan_id: output.smart_scan_id,
             contract_number: output.contract_number,
             cabang: output.cabang,
         });
@@ -278,6 +284,8 @@ function insertData(input) {
             province: input.province,
             postal_code: input.postal_code,
             file_name: input.file_name,
+            file_path: input.file_path,
+            smart_scan_id: input.smart_scan_id,
         },
     });
 }
@@ -291,11 +299,13 @@ const prosesData = async (req, res, next) => {
         for (const smartScan of smartScans) {
             const predictions = JSON.parse(smartScan.response_json).result[0].prediction;
 
-            const fileName = smartScan.file_name;
-            predictions.file_name = fileName;
-            const namaFile = fileName.split('/')[1].split('.')[0];
-            predictions.contract_number = namaFile;
-            predictions.cabang = `${namaFile.substring(0, 3)}000`;
+            predictions.file_name = smartScan.file_name;
+            const fileName = smartScan.file_name.split('.')[0];
+
+            predictions.file_path = smartScan.file_path;
+            predictions.smart_scan_id = smartScan.id;
+            predictions.contract_number = smartScan.file_name.split('.')[0];
+            predictions.cabang = `${fileName.substring(0, 3)}000`;
             results.push(manipulateData(predictions));
         }
 
