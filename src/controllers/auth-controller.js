@@ -138,7 +138,7 @@ function manipulateData(input) {
                 }
 
                 if (cell.label === 'tanggal_lahir') {
-                    dobsArray.push(cell.text);
+                    dobsArray.push(cell.text.trim().replaceAll('-', '/'));
                 }
 
                 if (cell.label === 'pendidikan') {
@@ -210,10 +210,39 @@ function manipulateData(input) {
         });
     });
 
-    // Convert output object to array
-    // const result = [output];
-
-    // Log the result
+    // check if nikArray is empty
+    if (nikArray.length === 0) {
+        output.table.push({
+            kk_no_gros: output.no_kk,
+            kk_no: output.no_kk,
+            name: '',
+            nik_gros: '',
+            nik: '',
+            gender: '',
+            date_of_birth: '',
+            place_of_birth: '',
+            religion: '',
+            education: '',
+            profession: '',
+            marital_status: '',
+            relation_status: '',
+            // Todo status on family card
+            citizenship: '',
+            father_name: '',
+            mother_name: '',
+            father_on_family_card: output.nama_kk,
+            address: output.address,
+            rt_rw: output.rt_rw,
+            kelurahan: output.kelurahan,
+            kecamatan: output.kecamatan,
+            kabupaten: output.kabupaten,
+            province: output.province,
+            postal_code: output.postal_code,
+            file_name: output.file_name,
+            contract_number: output.contract_number,
+            cabang: output.cabang,
+        });
+    }
     // console.log(result);
     return output;
 }
