@@ -124,80 +124,94 @@ function manipulateData(input) {
         if (item.label === 'table' && item.cells) {
             item.cells.forEach((cell) => {
                 if (cell.label === 'NIK') {
-                    nikArray.push(cell.text);
+                    nikArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'nama_lengkap') {
-                    namaArray.push(cell.text);
+                    namaArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'jenis_kelamin') {
-                    gendersArray.push(cell.text);
+                    gendersArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'tempat_lahir') {
-                    podArray.push(cell.text);
+                    podArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'tanggal_lahir') {
-                    dobsArray.push(cell.text.trim().replaceAll('-', '/'));
+                    dobsArray.push({ row: cell.row, value: cell.text.trim().replaceAll('-', '/') });
                 }
 
                 if (cell.label === 'pendidikan') {
-                    educationArray.push(cell.text);
+                    educationArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'jenis_pekerjaan') {
-                    jobArray.push(cell.text);
+                    jobArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'status_perkawinan') {
-                    statusArray.push(cell.text);
+                    statusArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'status_hubungan') {
-                    relationArray.push(cell.text);
+                    relationArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'kewarganegaraan') {
-                    citizenshipArray.push(cell.text);
+                    citizenshipArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'agama') {
-                    religionArray.push(cell.text);
+                    religionArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'ortu_ayah') {
-                    fatherArray.push(cell.text);
+                    fatherArray.push({ row: cell.row, value: cell.text });
                 }
 
                 if (cell.label === 'ortu_ibu') {
-                    motherArray.push(cell.text);
+                    motherArray.push({ row: cell.row, value: cell.text });
                 }
             });
         }
     });
 
     // Combine NIK, nama_lengkap, and status_perkawinan into table array
-    nikArray.forEach((nik, index) => {
+    nikArray.forEach((nik) => {
+        const name = namaArray.find((nama) => nama.row === nik.row);
+        const gender = gendersArray.find((g) => g.row === nik.row);
+        const dob = dobsArray.find((d) => d.row === nik.row);
+        const pod = podArray.find((p) => p.row === nik.row);
+        const religion = religionArray.find((r) => r.row === nik.row);
+        const education = educationArray.find((e) => e.row === nik.row);
+        const job = jobArray.find((j) => j.row === nik.row);
+        const status = statusArray.find((s) => s.row === nik.row);
+        const relation = relationArray.find((r) => r.row === nik.row);
+        const citizenship = citizenshipArray.find((c) => c.row === nik.row);
+        const father = fatherArray.find((f) => f.row === nik.row);
+        const mother = motherArray.find((m) => m.row === nik.row);
+
         output.table.push({
             kk_no_gros: output.no_kk,
             kk_no: output.no_kk,
-            name: namaArray[index] || '',
-            nik_gros: nik,
-            nik,
-            gender: gendersArray[index] || '',
-            date_of_birth: dobsArray[index] || '',
-            place_of_birth: podArray[index] || '',
-            religion: religionArray[index] || '',
-            education: educationArray[index] || '',
-            profession: jobArray[index] || '',
-            marital_status: statusArray[index] || '',
-            relation_status: relationArray[index] || '',
+            name: name ? name.value : '',
+            nik_gros: nik.value,
+            nik: nik.value,
+            gender: gender ? gender.value : '',
+            date_of_birth: dob ? dob.value : '',
+            place_of_birth: pod ? pod.value : '',
+            religion: religion ? religion.value : '',
+            education: education ? education.value : '',
+            profession: job ? job.value : '',
+            marital_status: status ? status.value : '',
+            relation_status: relation ? relation.value : '',
             // Todo status on family card
-            citizenship: citizenshipArray[index] || '',
-            father_name: fatherArray[index] || '',
-            mother_name: motherArray[index] || '',
+            citizenship: citizenship ? citizenship.value : '',
+            father_name: father ? father.value : '',
+            mother_name: mother ? mother.value : '',
+
             father_on_family_card: output.nama_kk,
             address: output.address,
             rt_rw: output.rt_rw,
