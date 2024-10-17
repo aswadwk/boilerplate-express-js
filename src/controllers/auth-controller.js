@@ -42,8 +42,16 @@ const currentUser = async (req, res, next) => {
     }
 };
 
+const chat = (req, res) => {
+    res.status(200).json({
+        status: true,
+        message: 'Chat successfully.',
+    });
+};
+
 export default {
     register,
     login,
     currentUser,
+    chat,
 };
