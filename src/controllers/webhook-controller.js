@@ -2,13 +2,7 @@ import whatsappService from '../services/whatsapp-service.js';
 
 const handleWebHookWhatsapp = async (req, res, next) => {
     try {
-        const result = await whatsappService.handleWebHook(req);
-
-        res.status(200).json({
-            status: true,
-            message: 'Webhook received successfully.',
-            data: result,
-        });
+        res.status(200).send(await whatsappService.handleWebHook(req));
     } catch (error) {
         next(error);
     }
