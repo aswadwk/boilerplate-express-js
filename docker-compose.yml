@@ -1,10 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - ${APP_PORT}:3000
     environment:
       - DATABASE_URL=mysql://root:root@mysql:3306/wa_api
     depends_on:
