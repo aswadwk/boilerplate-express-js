@@ -1,5 +1,5 @@
 import express from 'express';
-import webhookController from '../controllers/webhook-controller.js';
+import webhookController from '../controllers/whatsapp-controller.js';
 
 const publicApi = express.Router();
 
@@ -9,9 +9,11 @@ publicApi.get('/', (req, res) => {
         message: 'Welcome to the public API.',
     });
 });
-publicApi.get('/api/v1/webhook', webhookController.handleWebHookWhatsapp);
-publicApi.post('/api/v1/webhook', webhookController.handleWebHookWhatsapp);
-publicApi.get('/webhook', webhookController.handleWebHookWhatsapp);
+
+publicApi.get('/webhook', webhookController.verifyWebHookWhatsapp);
 publicApi.post('/webhook', webhookController.handleWebHookWhatsapp);
+
+// send a message
+publicApi.post('/send', webhookController.sendMessageWhatsapp);
 
 export default publicApi;

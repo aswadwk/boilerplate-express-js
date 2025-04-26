@@ -10,7 +10,8 @@
         "express": "^4.19.2",
         "joi": "^17.13.1",
         "jsonwebtoken": "^9.0.2",
-        "uuid": "^9.0.1",
+        "prisma": "^5.13.0",
+        "uuid": "^11.1.0",
         "winston": "^3.13.0",
       },
       "devDependencies": {
@@ -25,7 +26,6 @@
         "eslint-plugin-import": "^2.26.0",
         "jest": "^29.7.0",
         "nodemon": "^3.1.0",
-        "prisma": "^5.13.0",
         "supertest": "^7.0.0",
       },
     },
@@ -1293,7 +1293,7 @@
 
     "utils-merge": ["utils-merge@1.0.1", "", {}, "sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA=="],
 
-    "uuid": ["uuid@9.0.1", "", { "bin": "dist/bin/uuid" }, "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA=="],
+    "uuid": ["uuid@11.1.0", "", { "bin": { "uuid": "dist/esm/bin/uuid" } }, "sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A=="],
 
     "v8-to-istanbul": ["v8-to-istanbul@9.2.0", "", { "dependencies": { "@jridgewell/trace-mapping": "^0.3.12", "@types/istanbul-lib-coverage": "^2.0.1", "convert-source-map": "^2.0.0" } }, "sha512-/EH/sDgxU2eGxajKdwLCDmQ4FWq+kpi3uCmBGpw1xJtnAxEjlD8j8PEiGWpCIMIs3ciNAgH0d3TTJiUkYzyZjA=="],
 

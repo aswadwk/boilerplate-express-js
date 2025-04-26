@@ -9,14 +9,32 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id       String @id @db.VarChar(100)
-  email    String @db.VarChar(200)
-  password String @db.VarChar(255)
+  id          String    @id @db.VarChar(100)
+  email       String    @db.VarChar(200)
+  password    String    @db.VarChar(255)
+  name        String    @db.VarChar(100)
+  phone       String    @db.VarChar(20)
+  created_at  DateTime  @default(now()) @db.Timestamp(6)
+  updated_at  DateTime  @updatedAt @db.Timestamp(6)
+  deleted_at  DateTime? @db.Timestamp(6)
+  is_active   Boolean   @default(true) @db.Boolean
+  is_verified Boolean   @default(false) @db.Boolean
 
   @@map("users")
+}
+
+model Webhook {
+  id            String    @id @db.VarChar(100)
+  url           String    @db.VarChar(255)
+  response_json Json?
+  created_at    DateTime  @default(now()) @db.Timestamp(6)
+  updated_at    DateTime  @updatedAt @db.Timestamp(6)
+  deleted_at    DateTime? @db.Timestamp(6)
+
+  @@map("webhooks")
 }
