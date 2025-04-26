@@ -1,9 +1,17 @@
 import express from 'express';
-import authController from '../controllers/auth-controller.js';
+import webhookController from '../controllers/webhook-controller.js';
 
 const publicApi = express.Router();
 
-publicApi.post('/api/v1/register', authController.register);
-publicApi.post('/api/v1/login', authController.login);
+publicApi.get('/', (req, res) => {
+    res.status(200).json({
+        status: true,
+        message: 'Welcome to the public API.',
+    });
+});
+publicApi.get('/api/v1/webhook', webhookController.handleWebHookWhatsapp);
+publicApi.post('/api/v1/webhook', webhookController.handleWebHookWhatsapp);
+publicApi.get('/webhook', webhookController.handleWebHookWhatsapp);
+publicApi.post('/webhook', webhookController.handleWebHookWhatsapp);
 
 export default publicApi;
